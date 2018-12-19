@@ -145,12 +145,13 @@ public class MainApp {
 	}
 	
 	public static void demo11() {
-		Observable<Integer> fibonacci =
-		        Observable.just(0)
-		                  .repeat()
-		                  .scan(new int[]{0, 1}, (a, b) -> new int[]{a[1], a[0] + a[1]})
-		                  .map(a -> a[1]);
-		                  //.doOnNext(i -> System.out.println("a[1] = " + i));
+		Observable<Integer> fibonacci = Observable.just(0)
+							  .repeat()
+							  .scan(new int[]{1, 1},  (arr, ignore) -> {
+								  //System.out.println("ignore: " + ignore);
+								  return new int[]{arr[1], arr[0] + arr[1]};
+							  })
+							  .map(arr -> arr[1]);
 		fibonacci.take(10).subscribe(System.out::println);
 	}
 }
