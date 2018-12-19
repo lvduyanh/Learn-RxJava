@@ -143,4 +143,14 @@ public class MainApp {
 			System.out.println("hehe");
 		});
 	}
+	
+	public static void demo11() {
+		Observable<Integer> fibonacci =
+		        Observable.just(0)
+		                  .repeat()
+		                  .scan(new int[]{0, 1}, (a, b) -> new int[]{a[1], a[0] + a[1]})
+		                  .map(a -> a[1]);
+		                  //.doOnNext(i -> System.out.println("a[1] = " + i));
+		fibonacci.take(10).subscribe(System.out::println);
+	}
 }
